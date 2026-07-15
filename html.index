@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Clock Timer</title>
+
+    <style>
+        body{
+            margin:0;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            background:#111;
+            font-family:Arial, sans-serif;
+        }
+
+        .clock{
+            display:flex;
+            gap:20px;
+        }
+
+        .flip-box{
+            position:relative;
+            width:100px;
+            height:120px;
+            background:#222;
+            color:white;
+            font-size:60px;
+            font-weight:bold;
+            text-align:center;
+            line-height:120px;
+            border-radius:10px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.5);
+            overflow:hidden;
+        }
+
+        .flip-box::before{
+            content:'';
+            position:absolute;
+            top:50%;
+            left:0;
+            width:100%;
+            height:2px;
+            background:#444;
+        }
+
+        .label{
+            position:absolute;
+            bottom:5px;
+            width:100%;
+            font-size:14px;
+            color:#bbb;
+            line-height:normal;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="clock">
+        <div class="flip-box">
+            <span id="hours">00</span>
+            <div class="label">Hours</div>
+        </div>
+
+        <div class="flip-box">
+            <span id="minutes">00</span>
+            <div class="label">Minutes</div>
+        </div>
+
+        <div class="flip-box">
+            <span id="seconds">00</span>
+            <div class="label">Seconds</div>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+
+            let h = String(now.getHours()).padStart(2, '0');
+            let m = String(now.getMinutes()).padStart(2, '0');
+            let s = String(now.getSeconds()).padStart(2, '0');
+
+            document.getElementById("hours").textContent = h;
+            document.getElementById("minutes").textContent = m;
+            document.getElementById("seconds").textContent = s;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+
+</body>
+</html>
